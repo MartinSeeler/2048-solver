@@ -1,7 +1,4 @@
 import java.awt.*;
-import java.util.*;
-import java.util.List;
-import java.util.function.Consumer;
 
 /**
  * @author Martin Seeler <mseeler@avantgarde-labs.de>
@@ -48,6 +45,7 @@ public class Main {
         Thread.sleep(2000L);
         final PointerInfo pointerInfo = MouseInfo.getPointerInfo();
         Robot robot = new Robot();
+
         for (int x = 0; x < squareSize; x++) {
             for (int y = 0; y < squareSize; y++) {
                 Thread.sleep(10);
