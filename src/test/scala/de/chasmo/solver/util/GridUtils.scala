@@ -6,20 +6,6 @@ import de.chasmo.solver.types.Tile
 
 object GridUtils {
 
-  val numMappings = Map(
-    2 -> `2`,
-    4 -> `4`,
-    8 -> `8`,
-    16 -> `16`,
-    32 -> `32`,
-    64 -> `64`,
-    128 -> `128`,
-    256 -> `256`,
-    512 -> `512`,
-    1024 -> `1024`,
-    2048 -> `2048`
-  )
-
   def create(rows: List[Int]*): Grid = {
     val colSizes = rows.map(_.size)
     val rowSize = rows.size
@@ -33,7 +19,7 @@ object GridUtils {
       (row, y) <- rows.zipWithIndex
       (num, x) <- row.zipWithIndex
     } {
-      g = g.updated(Pos(x, y), numMappings.get(num).map(n => Tile(Pos(x, y), n)))
+      g = g.updated(Pos(x, y), Num.lift(num).map(n => Tile(Pos(x, y), n)))
     }
 
     g

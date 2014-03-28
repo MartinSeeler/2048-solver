@@ -1,10 +1,12 @@
+import spray.revolver.RevolverPlugin.Revolver
+
 name := "2048-solver"
 
 organization := "de.chasmo"
 
 version := "1.0-SNAPSHOT"
 
-scalaVersion := "2.10.3"
+scalaVersion := "2.10.4"
 
 scalacOptions ++= Seq(
   "-feature",
@@ -18,13 +20,14 @@ scalacOptions ++= Seq(
   "-encoding", "UTF-8")
 
 libraryDependencies ++= Seq(
-  "org.scala-lang"   %  "jline"       % "2.10.3"   exclude ("org.fusesource.jansi", "jansi"),
-  "com.typesafe"     %  "config"      % "1.2.0",
-  "org.scalatest"   %%  "scalatest"   % "2.1.0"    % "test",
-  "org.scalacheck"  %%  "scalacheck"  % "1.11.0"   % "test"
+  "org.scala-lang"      %  "jline"       % "2.10.4"   exclude ("org.fusesource.jansi", "jansi"),
+  "com.typesafe"        %  "config"      % "1.2.0",
+  "com.netflix.rxjava"  % "rxjava-scala" % "0.17.1",
+  "org.scalatest"      %%  "scalatest"   % "2.1.0"    % "test",
+  "org.scalacheck"     %%  "scalacheck"  % "1.11.3"   % "test"
 )
 
-mainClass in Compile := Some("de.chasmo.solver.ConsoleGameSolver")
+mainClass in Compile := Some("de.chasmo.solver.SimpleBotSolver")
 
 licenses += "The MIT License" -> url("http://knutwalker.mit-license.org/license.txt")
 
@@ -43,3 +46,5 @@ pomExtra :=
   </developers>
 
 net.virtualvoid.sbt.graph.Plugin.graphSettings
+
+Revolver.settings

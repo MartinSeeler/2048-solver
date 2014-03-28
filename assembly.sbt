@@ -9,7 +9,7 @@ outputPath in assembly := baseDirectory.value / (jarName in assembly).value
 
 test in assembly := {}
 
-mainClass in assembly := Some("de.chasmo.solver.ConsoleGameSolver")
+mainClass in assembly := Some("de.chasmo.solver.SimpleBotSolver")
 
 assemblyOption in assembly ~= { _.copy(prependShellScript = Some(defaultShellScript)) }
 

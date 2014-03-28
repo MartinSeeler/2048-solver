@@ -13,7 +13,8 @@ class GameSpec extends FlatSpec with Matchers {
     "solver.start-tiles" -> "2"
   ).asJava)
 
-  val game = Game(config)
+  val settings = Settings(config withFallback ConfigFactory.defaultReference())
+  val game = new Game(settings)
 
 
   "The Game" should "correctly move right" in {
@@ -29,9 +30,9 @@ class GameSpec extends FlatSpec with Matchers {
       List(0, 0, 4, 8),
       List(0, 0, 0, 2))
 
-    val g = new Game(List(Game.History(before, None, 0)))
+    val g = new Game(List(Game.History(before, None, 0)), settings)
 
-    GridUtils.cells(g.moveAround(Right, addRandomTile = false).grid) shouldBe after
+    GridUtils.cells(g.moveAround(Right, g.score)(g.grid).get.grid) shouldBe after
   }
 
   it should "correctly move down" in {
@@ -47,9 +48,9 @@ class GameSpec extends FlatSpec with Matchers {
       List(0, 2, 0, 2),
       List(2, 4, 8, 8))
 
-    val g = new Game(List(Game.History(before, None, 0)))
+    val g = new Game(List(Game.History(before, None, 0)), settings)
 
-    GridUtils.cells(g.moveAround(Down, addRandomTile = false).grid) shouldBe after
+    GridUtils.cells(g.moveAround(Down, g.score)(g.grid).get.grid) shouldBe after
   }
 
   it should "correctly move left" in {
@@ -65,9 +66,9 @@ class GameSpec extends FlatSpec with Matchers {
       List(4, 8, 0, 0),
       List(2, 0, 0, 0))
 
-    val g = new Game(List(Game.History(before, None, 0)))
+    val g = new Game(List(Game.History(before, None, 0)), settings)
 
-    GridUtils.cells(g.moveAround(Left, addRandomTile = false).grid) shouldBe after
+    GridUtils.cells(g.moveAround(Left, g.score)(g.grid).get.grid) shouldBe after
   }
 
   it should "correctly move up" in {
@@ -83,9 +84,9 @@ class GameSpec extends FlatSpec with Matchers {
       List(0, 0, 0, 0),
       List(0, 0, 0, 0))
 
-    val g = new Game(List(Game.History(before, None, 0)))
+    val g = new Game(List(Game.History(before, None, 0)), settings)
 
-    GridUtils.cells(g.moveAround(Up, addRandomTile = false).grid) shouldBe after
+    GridUtils.cells(g.moveAround(Up, g.score)(g.grid).get.grid) shouldBe after
   }
 
   it should "merge correctly when moving right" in {
@@ -101,9 +102,9 @@ class GameSpec extends FlatSpec with Matchers {
       List(0, 0, 0, 8),
       List(0, 0, 2, 4))
 
-    val g = new Game(List(Game.History(before, None, 0)))
+    val g = new Game(List(Game.History(before, None, 0)), settings)
 
-    GridUtils.cells(g.moveAround(Right, addRandomTile = false).grid) shouldBe after
+    GridUtils.cells(g.moveAround(Right, g.score)(g.grid).get.grid) shouldBe after
   }
 
   it should "merge correctly when moving down" in {
@@ -119,9 +120,9 @@ class GameSpec extends FlatSpec with Matchers {
       List(2, 0, 0, 0),
       List(4, 8, 16, 2))
 
-    val g = new Game(List(Game.History(before, None, 0)))
+    val g = new Game(List(Game.History(before, None, 0)), settings)
 
-    GridUtils.cells(g.moveAround(Down, addRandomTile = false).grid) shouldBe after
+    GridUtils.cells(g.moveAround(Down, g.score)(g.grid).get.grid) shouldBe after
   }
 
   it should "merge correctly when moving left" in {
@@ -137,9 +138,9 @@ class GameSpec extends FlatSpec with Matchers {
       List(8, 0, 0, 0),
       List(4, 2, 0, 0))
 
-    val g = new Game(List(Game.History(before, None, 0)))
+    val g = new Game(List(Game.History(before, None, 0)), settings)
 
-    GridUtils.cells(g.moveAround(Left, addRandomTile = false).grid) shouldBe after
+    GridUtils.cells(g.moveAround(Left, g.score)(g.grid).get.grid) shouldBe after
   }
 
   it should "merge correctly when moving up" in {
@@ -155,8 +156,8 @@ class GameSpec extends FlatSpec with Matchers {
       List(0, 0, 0, 0),
       List(0, 0, 0, 0))
 
-    val g = new Game(List(Game.History(before, None, 0)))
+    val g = new Game(List(Game.History(before, None, 0)), settings)
 
-    GridUtils.cells(g.moveAround(Up, addRandomTile = false).grid) shouldBe after
+    GridUtils.cells(g.moveAround(Up, g.score)(g.grid).get.grid) shouldBe after
   }
 }
